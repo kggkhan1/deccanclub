@@ -290,7 +290,99 @@ Eircode: D15 EY81
 
     <!-- Prayer Timetable Section -->
    
-      <section class="section" id="prayer-timetable">
+  <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dublin Prayer Timetable - June 2025</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .section {
+            padding: 40px 0;
+        }
+        .container {
+            width: 100%;
+            padding-right: 15px;
+            padding-left: 15px;
+            margin-right: auto;
+            margin-left: auto;
+        }
+        .section-title {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        .section-title h2 {
+            font-size: 32px;
+            font-weight: 700;
+            color: #2a4365;
+        }
+        .prayer-container {
+            background-color: #f8f9fa;
+            border-radius: 8px;
+            padding: 30px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        .location {
+            font-size: 18px;
+            font-weight: bold;
+            margin-bottom: 10px;
+            color: #2a4365;
+        }
+        .date {
+            font-size: 16px;
+            margin-bottom: 20px;
+            color: #4a5568;
+        }
+        .prayer-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 25px;
+        }
+        .prayer-table th, .prayer-table td {
+            padding: 12px 15px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+        .prayer-table th {
+            background-color: #2a4365;
+            color: white;
+            font-weight: 600;
+        }
+        .prayer-table tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+        .prayer-table tr:hover {
+            background-color: #e2e8f0;
+        }
+        .next-prayer {
+            font-size: 18px;
+            font-weight: bold;
+            padding: 15px;
+            background-color: #2a4365;
+            color: white;
+            border-radius: 5px;
+            text-align: center;
+        }
+        @media (max-width: 768px) {
+            .prayer-table {
+                font-size: 14px;
+            }
+            .prayer-table th, .prayer-table td {
+                padding: 8px 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <section class="section" id="prayer-timetable">
         <div class="container">
             <div class="section-title">
                 <h2>Prayer Timetable</h2>
@@ -301,12 +393,12 @@ Eircode: D15 EY81
                 <div id="hijriDate" style="margin-bottom: 20px;"></div>
                 
                 <table class="prayer-table" id="prayerTable">
-                    <tr><th>Prayer</th><th>Adhan Time</th><th>Iqamah Time</th></tr>
-                    <tr><td>Fajr</td><td id="FajrAdhan">-</td><td id="FajrIqamah">-</td></tr>
-                    <tr><td>Dhuhr</td><td id="DhuhrAdhan">-</td><td id="DhuhrIqamah">-</td></tr>
-                    <tr><td>Asr</td><td id="AsrAdhan">-</td><td id="AsrIqamah">-</td></tr>
-                    <tr><td>Maghrib</td><td id="MaghribAdhan">-</td><td id="MaghribIqamah">-</td></tr>
-                    <tr><td>Isha</td><td id="IshaAdhan">-</td><td id="IshaIqamah">-</td></tr>
+                    <tr><th>Prayer</th><th>Adhan Time</th></tr>
+                    <tr><td>Fajr</td><td id="FajrAdhan">-</td></tr>
+                    <tr><td>Dhuhr</td><td id="DhuhrAdhan">-</td></tr>
+                    <tr><td>Asr</td><td id="AsrAdhan">-</td></tr>
+                    <tr><td>Maghrib</td><td id="MaghribAdhan">-</td></tr>
+                    <tr><td>Isha</td><td id="IshaAdhan">-</td></tr>
                 </table>
                 <div class="next-prayer" id="nextPrayer">Loading prayer times...</div>
             </div>
@@ -347,14 +439,6 @@ Eircode: D15 EY81
             "30": ["2:51", "13:30", "17:57", "22:00", "23:30"]
         };
 
-        const iqamahTimes = {
-            "Fajr": "",
-            "Dhuhr": "",
-            "Asr": "",
-            "Maghrib": "", // 5 minutes after Adhan for June 13
-            "Isha": ""
-        };
-
         function updateTimetable() {
             const now = new Date();
             const day = now.getDate();
@@ -376,20 +460,6 @@ Eircode: D15 EY81
             document.getElementById("AsrAdhan").textContent = asr;
             document.getElementById("MaghribAdhan").textContent = maghrib;
             document.getElementById("IshaAdhan").textContent = isha;
-
-            // Update iqamah times (you can customize these)
-            document.getElementById("FajrIqamah").textContent = iqamahTimes["Fajr"];
-            document.getElementById("DhuhrIqamah").textContent = iqamahTimes["Dhuhr"];
-            document.getElementById("AsrIqamah").textContent = iqamahTimes["Asr"];
-            
-            // Special case for Maghrib (5 minutes after Adhan)
-            const maghribTime = new Date(now.getFullYear(), now.getMonth(), now.getDate(), 
-                                       parseInt(maghrib.split(':')[0]), parseInt(maghrib.split(':')[1]));
-            maghribTime.setMinutes(maghribTime.getMinutes() + 5);
-            const maghribIqamahStr = maghribTime.getHours() + ":" + (maghribTime.getMinutes() < 10 ? '0' : '') + maghribTime.getMinutes();
-            document.getElementById("MaghribIqamah").textContent = maghribIqamahStr;
-            
-            document.getElementById("IshaIqamah").textContent = iqamahTimes["Isha"];
 
             updateNextPrayer(fajr, dhuhr, asr, maghrib, isha);
         }
@@ -470,6 +540,8 @@ Eircode: D15 EY81
         // Update the timetable every minute to catch prayer time changes
         setInterval(updateTimetable, 60000);
     </script>
+</body>
+</html>
                <script src="script.js"></script>
             </div>
         </div>
