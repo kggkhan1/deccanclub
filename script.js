@@ -1,6 +1,6 @@
 
                 // Prayer Timetable Script
-                const timetable = {
+               const timetable = {
     "1": ["3:00", "13:25", "17:48", "21:45", "23:15"],
     "2": ["2:59", "13:25", "17:48", "21:46", "23:16"],
     "3": ["2:57", "13:25", "17:49", "21:47", "23:17"],
@@ -32,89 +32,102 @@
     "29": ["2:50", "13:30", "17:57", "22:01", "23:31"],
     "30": ["2:51", "13:30", "17:57", "22:00", "23:30"]
 };
-                const iqamahTimes = {
-                    "Fajr": "",
-                    "Dhuhr": "",
-                    "Asr": "",
-                    "Maghrib": "",
-                    "Isha": ""
-                };
 
-                function updateTimetable() {
-                    const now = new Date();
-                    const day = now.getDate();
-                    const month = now.getMonth();
+const iqamahTimes = {
+    "Fajr": "3:30",
+    "Dhuhr": "13:45",
+    "Asr": "18:15",
+    "Maghrib": "5 minutes after Adhan",
+    "Isha": "23:45"
+};
 
-                    document.getElementById("todayDate").textContent = now.toDateString();
+function updateTimetable() {
+    const now = new Date();
+    const day = now.getDate();
+    const month = now.getMonth(); // Note: months are 0-indexed (0-11)
 
-                    if (month !== 4 || !timetable[day]) {
-                        document.getElementById("nextPrayer").textContent = "Timetable only available for May 2025.";
-                        return;
-                    }
+    document.getElementById("todayDate").textContent = now.toDateString();
 
-                    const [fajr, dhuhr, asr, maghrib, isha] = timetable[day];
+    // Changed from month 4 (May) to month 5 (June) since your timetable is for June
+    if (month !== 5 || !timetable[day]) {
+        document.getElementById("nextPrayer").textContent = "Timetable only available for June 2025.";
+        return;
+    }
 
-                    document.getElementById("FajrAdhan").textContent = fajr;
-                    document.getElementById("DhuhrAdhan").textContent = dhuhr;
-                    document.getElementById("AsrAdhan").textContent = asr;
-                    document.getElementById("MaghribAdhan").textContent = maghrib;
-                    document.getElementById("IshaAdhan").textContent = isha;
+    const [fajr, dhuhr, asr, maghrib, isha] = timetable[day];
 
-                    document.getElementById("FajrIqamah").textContent = iqamahTimes["Fajr"];
-                    document.getElementById("DhuhrIqamah").textContent = iqamahTimes["Dhuhr"];
-                    document.getElementById("AsrIqamah").textContent = iqamahTimes["Asr"];
-                    document.getElementById("MaghribIqamah").textContent = iqamahTimes["Maghrib"];
-                    document.getElementById("IshaIqamah").textContent = iqamahTimes["Isha"];
+    // Update adhan times
+    document.getElementById("FajrAdhan").textContent = fajr;
+    document.getElementById("DhuhrAdhan").textContent = dhuhr;
+    document.getElementById("AsrAdhan").textContent = asr;
+    document.getElementById("MaghribAdhan").textContent = maghrib;
+    document.getElementById("IshaAdhan").textContent = isha;
 
-                    updateNextPrayer(fajr, dhuhr, asr, maghrib, isha);
-                }
+    // Update iqamah times
+    document.getElementById("FajrIqamah").textContent = iqamahTimes["Fajr"];
+    document.getElementById("DhuhrIqamah").textContent = iqamahTimes["Dhuhr"];
+    document.getElementById("AsrIqamah").textContent = iqamahTimes["Asr"];
+    document.getElementById("MaghribIqamah").textContent = iqamahTimes["Maghrib"];
+    document.getElementById("IshaIqamah").textContent = iqamahTimes["Isha"];
 
-                function updateNextPrayer(fajr, dhuhr, asr, maghrib, isha) {
-                    const now = new Date();
-                    const prayers = {
-                        "Fajr": fajr,
-                        "Dhuhr": dhuhr,
-                        "Asr": asr,
-                        "Maghrib": maghrib,
-                        "Isha": isha
-                    };
+    updateNextPrayer(fajr, dhuhr, asr, maghrib, isha);
+}
 
-                    for (const [name, time] of Object.entries(prayers)) {
-                        const [h, m] = time.split(":").map(Number);
-                        const prayerTime = new Date(now.getFullYear(), now.getMonth(), now.getDate(), h, m);
-                        if (now < prayerTime) {
-                            const diff = Math.floor((prayerTime - now) / 1000);
-                            const hours = Math.floor(diff / 3600);
-                            const minutes = Math.floor((diff % 3600) / 60);
-                            const seconds = diff % 60;
-                            const pad = n => n.toString().padStart(2, '0');
-                            document.getElementById("nextPrayer").textContent = `Next prayer: ${name} in ${pad(hours)}h ${pad(minutes)}m ${pad(seconds)}s`;
-                            return;
-                        }
-                    }
+function updateNextPrayer(fajr, dhuhr, asr, maghrib, isha) {
+    const now = new Date();
+    const prayers = [
+        { name: "Fajr", time: fajr },
+        { name: "Dhuhr", time: dhuhr },
+        { name: "Asr", time: asr },
+        { name: "Maghrib", time: maghrib },
+        { name: "Isha", time: isha }
+    ];
 
-                    document.getElementById("nextPrayer").textContent = "Next prayer: Fajr tomorrow";
-                }
+    // Find the next prayer
+    for (const prayer of prayers) {
+        const [h, m] = prayer.time.split(":").map(Number);
+        const prayerTime = new Date(now.getFullYear(), now.getMonth(), now.getDate(), h, m);
+        
+        if (now < prayerTime) {
+            updateCountdown(prayerTime, prayer.name);
+            return;
+        }
+    }
 
-                function updateHijriDate() {
-                    try {
-                        const today = new Date();
-                        const hijriDate = new Intl.DateTimeFormat('en-TN-u-ca-islamic', {
-                            day: 'numeric',
-                            month: 'long',
-                            year: 'numeric'
-                        }).format(today);
+    // If all prayers have passed for today, next is Fajr tomorrow
+    const tomorrow = new Date(now);
+    tomorrow.setDate(tomorrow.getDate() + 1);
+    const [h, m] = fajr.split(":").map(Number);
+    const fajrTomorrow = new Date(tomorrow.getFullYear(), tomorrow.getMonth(), tomorrow.getDate(), h, m);
+    
+    updateCountdown(fajrTomorrow, "Fajr (tomorrow)");
+}
 
-                        document.getElementById("hijriDate").textContent = `Hijri Date: ${hijriDate}`;
-                    } catch (e) {
-                        document.getElementById("hijriDate").textContent = "Hijri date not supported in this browser.";
-                    }
-                }
+function updateCountdown(targetTime, prayerName) {
+    function update() {
+        const now = new Date();
+        const diff = Math.floor((targetTime - now) / 1000);
+        
+        if (diff <= 0) {
+            clearInterval(interval);
+            updateTimetable(); // Refresh the timetable
+            return;
+        }
 
-                updateTimetable();
-                setInterval(updateTimetable, 1000);
-                updateHijriDate();
-                function updateHijriDate() {
+        const hours = Math.floor(diff / 3600);
+        const minutes = Math.floor((diff % 3600) / 60);
+        const seconds = diff % 60;
+        const pad = n => n.toString().padStart(2, '0');
+        
+        document.getElementById("nextPrayer").textContent = 
+            `Next prayer: ${prayerName} in ${pad(hours)}h ${pad(minutes)}m ${pad(seconds)}s`;
+    }
+
+    update(); // Initial call
+    const interval = setInterval(update, 1000); // Update every second
+}
+
+function updateHijriDate() {
     try {
         const today = new Date();
         const hijriDate = new Intl.DateTimeFormat('en-TN-u-ca-islamic', {
@@ -125,34 +138,14 @@
 
         document.getElementById("hijriDate").textContent = `Hijri Date: ${hijriDate}`;
     } catch (error) {
-        // Fallback: fetch Hijri date from Aladhan API
-        fetchHijriDateFromAPI();
+        // Fallback: use a simple calculation or display a static message
+        document.getElementById("hijriDate").textContent = "Hijri date not available";
     }
 }
 
-function fetchHijriDateFromAPI() {
-    const today = new Date();
-    const dd = String(today.getDate()).padStart(2, '0');
-    const mm = String(today.getMonth() + 1).padStart(2, '0'); // Months are 0-based
-    const yyyy = today.getFullYear();
-
-    const url = `https://islamicfoundation.ie/${dd}-${mm}-${yyyy}`;
-
-    fetch(url)
-        .then(response => response.json())
-        .then(data => {
-            if (data && data.data && data.data.hijri) {
-                const hijri = data.data.hijri;
-                const hijriDateStr = `Hijri Date: ${hijri.day} ${hijri.month.en} ${hijri.year}`;
-                document.getElementById("hijriDate").textContent = hijriDateStr;
-            } else {
-                document.getElementById("hijriDate").textContent = "Hijri date unavailable.";
-            }
-        })
-        .catch(() => {
-            document.getElementById("hijriDate").textContent = "Error fetching Hijri date.";
-        });
-}
+// Initialize
+updateTimetable();
+updateHijriDate();
 
             
 
