@@ -7,11 +7,1430 @@
     <title>Deccan Club of Ireland | Bridging Cultures, Building Futures</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Playfair+Display:wght@400;700&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+       :root {
+    /* Primary Colors */
+    --primary-color: #2A5885;       /* Deep Navy Blue */
+    --primary-light: #547AA5;       /* Lighter Blue */
+    --primary-dark: #1A3A6A;        /* Darker Blue */
     
+    /* Accent Colors */
+    --accent-color: #D4AF37;        /* Metallic Gold */
+    --accent-dark: #B38F2A;         /* Darker Gold */
+    --accent-light: #FFD95E;        /* Lighter Gold */
+    
+    /* Neutrals */
+    --light-color: #F8F9FA;         /* Light background */
+    --dark-color: #212529;          /* Dark text */
+    --gray-mid: #6C757D;
+    
+    /* Functional Colors */
+    --immigration-color: #3498db;   /* Blue for immigration section */
+    --success-color: #388E3C;       /* Green */
+    --error-color: #D32F2F;         /* Red */
+    --warning-color: #FFA000;       /* Amber */
+    
+    /* Overlays */
+    --overlay-color: rgba(42, 88, 133, 0.85);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    -webkit-tap-highlight-color: transparent;
+}
+
+body {
+    background-color: var(--light-color);
+    color: var(--dark-color);
+    line-height: 1.6;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    -webkit-text-size-adjust: 100%;
+    -webkit-font-smoothing: antialiased;
+}
+
+/* ==================== HEADER STYLES ==================== */
+header {
+    background: 
+                url('images/new dci logo (4).png' ) center/cover no-repeat;
+    color: white;
+    padding: 2rem 1rem;
+    text-align: center;
+    min-height: 80vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    box-shadow: 0 4px 20px rgba(240, 238, 238, 0.2);
+}
+
+.header-container {
+    width: 100%;
+    max-width: 1200px;
+    padding: 2rem;
+    animation: fadeIn 1s ease-out;
+}
+
+.logo {
+    height: 150px;
+    width: auto;
+    filter: drop-shadow(0 4px 8px rgba(0,0,0,0.4));
+    max-width: 100%;
+}
+
+.header-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 4rem;
+    font-weight: 700;
+    color: white;
+    text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.6);
+    line-height: 1.1;
+    margin-bottom: 0.5rem;
+    word-wrap: break-word;
+}
+
+.header-title span {
+    color: var(--accent-color);
+    display: block;
+    font-size: 2.5rem;
+    font-weight: 600;
+    font-family: 'Montserrat', sans-serif;
+    margin-top: 0.5rem;
+}
+
+.header-tagline {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 1.5rem;
+    color: white;
+    max-width: 800px;
+    margin: 0 auto;
+    text-shadow: 1px 1px 3px rgba(0,0,0,0.5);
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* ==================== MAIN STYLES ==================== */
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 1rem;
+    width: 100%;
+}
+
+/* Navigation */
+nav {
+    background-color: var(--primary-color);
+    padding: 0.5rem 0;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+nav ul {
+    display: flex;
+    justify-content: center;
+    list-style: none;
+    flex-wrap: wrap;
+    padding: 0;
+    margin: 0;
+}
+
+nav ul li {
+    margin: 0 1rem;
+    position: relative;
+}
+
+nav ul li a {
+    color: white;
+    text-decoration: none;
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+    transition: all 0.3s;
+    display: flex;
+    align-items: center;
+    white-space: nowrap;
+}
+
+nav ul li a:hover {
+    background-color: var(--accent-color);
+    color: var(--dark-color);
+    transform: translateY(-2px);
+}
+
+/* Dropdown Menu */
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    min-width: 200px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+    border-radius: 4px;
+    top: 100%;
+    left: 0;
+}
+
+.dropdown-content a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+    text-align: left;
+}
+
+.dropdown-content a:hover {
+    background-color: #f1f1f1;
+    color: var(--primary-color);
+}
+
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+/* Hero Section */
+.hero {
+    padding: 4rem 0;
+    text-align: center;
+    background: linear-gradient(135deg, var(--primary-color) 0%, var(--accent-color) 100%);
+    color: white;
+}
+
+.hero h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+}
+
+.hero p {
+    font-size: 1.2rem;
+    max-width: 800px;
+    margin: 0 auto 2rem;
+}
+
+/* Button Styles */
+.btn {
+    display: inline-block;
+    padding: 0.8rem 1.5rem;
+    background-color: var(--accent-color);
+    color: var(--dark-color);
+    border: none;
+    border-radius: 5px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all 0.3s;
+    text-decoration: none;
+    font-weight: 600;
+    -webkit-appearance: none;
+}
+
+.btn:hover {
+    background-color: var(--accent-dark);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+.btn-outline {
+    background-color: transparent;
+    border: 2px solid white;
+    color: white;
+    margin-left: 1rem;
+}
+
+.btn-outline:hover {
+    background-color: rgba(255,255,255,0.1);
+    transform: translateY(-2px);
+}
+
+/* Section Styles */
+.section {
+    padding: 4rem 0;
+}
+
+.section-title {
+    text-align: center;
+    margin-bottom: 3rem;
+}
+
+.section-title h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 2rem;
+    color: var(--primary-color);
+    position: relative;
+    display: inline-block;
+}
+
+.section-title h2::after {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80px;
+    height: 3px;
+    background-color: var(--accent-color);
+}
+
+/* Grid Layouts */
+.about-grid, .programs-grid, .resources-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+}
+
+/* Card Styles */
+.about-card, .program-card, .resource-card {
+    background-color: white;
+    border-radius: 8px;
+    padding: 2rem;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    transition: all 0.3s;
+    border-top: 4px solid var(--primary-color);
+}
+
+.about-card:hover, .program-card:hover, .resource-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+    border-top-color: var(--accent-color);
+}
+
+.about-card-icon {
+    font-size: 2rem;
+    color: var(--accent-color);
+    margin-bottom: 1rem;
+}
+
+.program-img {
+    height: 200px;
+    overflow: hidden;
+    border-radius: 8px 8px 0 0;
+    margin: -2rem -2rem 1rem -2rem;
+}
+
+.program-img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* Prayer Timetable Styles */
+.prayer-container {
+    background-color: white;
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 1.5rem;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    border-top: 4px solid var(--primary-color);
+}
+
+.location, .date, .next-prayer {
+    text-align: center;
+    margin-bottom: 1rem;
+}
+
+.date {
+    font-size: 1rem;
+    color: #555;
+}
+
+.prayer-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 1.5rem;
+}
+
+.prayer-table th, .prayer-table td {
+    padding: 0.8rem;
+    text-align: center;
+}
+
+.prayer-table th {
+    background-color: var(--primary-color);
+    color: white;
+}
+
+.prayer-table tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+.next-prayer {
+    font-size: 1.1rem;
+    font-weight: bold;
+    color: var(--primary-color);
+    padding: 0.8rem;
+    background-color: #f0f0f0;
+    border-radius: 5px;
+}
+
+/* Quick Links Sections */
+.sections {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2rem;
+    margin: 2rem 0;
+}
+
+.quick-links-section {
+    background-color: white;
+    border-radius: 8px;
+    padding: 1.5rem;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    transition: all 0.3s;
+    border-top: 4px solid var(--primary-color);
+    flex: 1;
+    min-width: 250px;
+}
+
+.quick-links-section:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+}
+
+.immigration-section {
+    border-top: 4px solid var(--immigration-color);
+}
+
+.quick-links-section h2 {
+    color: var(--primary-color);
+    margin-bottom: 1rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 2px solid var(--accent-color);
+}
+
+.immigration-section h2 {
+    border-bottom: 2px solid var(--immigration-color);
+}
+
+.quick-links-section ul {
+    list-style: none;
+    padding: 0;
+}
+
+.quick-links-section ul li {
+    margin-bottom: 0.8rem;
+}
+
+.quick-links-section ul li a {
+    color: var(--dark-color);
+    text-decoration: none;
+    transition: all 0.3s;
+    display: flex;
+    align-items: center;
+    padding: 0.5rem;
+    border-radius: 4px;
+}
+
+.quick-links-section ul li a:hover {
+    color: var(--accent-color);
+    background-color: rgba(42, 88, 133, 0.1);
+    transform: translateX(5px);
+}
+
+.immigration-section ul li a:hover {
+    color: var(--immigration-color);
+}
+
+.quick-links-section ul li a i {
+    margin-right: 0.5rem;
+    color: var(--primary-color);
+}
+
+.immigration-section ul li a i {
+    color: var(--immigration-color);
+}
+
+/* Events Section */
+.events-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+}
+
+.event-card {
+    background-color: white;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    transition: all 0.3s;
+    border-top: 4px solid var(--primary-color);
+}
+
+.event-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+}
+
+.event-date {
+    background-color: var(--primary-color);
+    color: white;
+    padding: 1rem;
+    text-align: center;
+    font-weight: bold;
+}
+
+.event-content {
+    padding: 1.5rem;
+}
+
+.event-meta {
+    display: flex;
+    justify-content: space-between;
+    margin: 0.5rem 0 1rem;
+    color: #666;
+    font-size: 0.9rem;
+}
+
+/* Contact Form Styles */
+.contact-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 3rem;
+}
+
+.contact-info h3, .contact-form h3 {
+    margin-bottom: 1.5rem;
+    color: var(--primary-color);
+}
+
+.contact-item {
+    display: flex;
+    margin-bottom: 1.5rem;
+}
+
+.contact-icon {
+    margin-right: 1rem;
+    color: var(--accent-color);
+}
+
+.contact-form form {
+    display: grid;
+    gap: 1rem;
+}
+
+.contact-form input, 
+.contact-form textarea {
+    width: 100%;
+    padding: 0.8rem;
+    border-radius: 5px;
+    border: 1px solid #ddd;
+    font-size: 1rem;
+    transition: all 0.3s;
+    -webkit-appearance: none;
+}
+
+.contact-form input:focus, 
+.contact-form textarea:focus {
+    border-color: var(--accent-color);
+    outline: none;
+    box-shadow: 0 0 0 2px rgba(212, 175, 55, 0.2);
+}
+
+.contact-form textarea {
+    min-height: 120px;
+}
+
+/* Social Links */
+.social-links {
+    display: flex;
+    gap: 1rem;
+    margin-top: 1rem;
+}
+
+.social-links a {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    background-color: var(--primary-color);
+    color: white;
+    border-radius: 50%;
+    transition: all 0.3s;
+}
+
+.social-links a:hover {
+    background-color: var(--accent-color);
+    color: var(--dark-color);
+    transform: translateY(-3px);
+}
+
+/* Tabbed Interface Styles */
+.tabbed-interface {
+    background: white;
+    border-radius: 8px 8px 0 0;
+    box-shadow: 0 -2px 10px rgba(0,0,0,0.1);
+    margin-top: 50px;
+    border-top: 4px solid var(--primary-color);
+}
+
+.tab-buttons {
+    display: flex;
+    border-bottom: 1px solid #ddd;
+    flex-wrap: wrap;
+}
+
+.tab-btn {
+    padding: 12px 20px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+    color: #777;
+    position: relative;
+    transition: all 0.3s;
+    flex: 1;
+    min-width: 120px;
+}
+
+.tab-btn:hover {
+    color: var(--primary-color);
+}
+
+.tab-btn.active {
+    color: var(--primary-color);
+    font-weight: 600;
+}
+
+.tab-btn.active::after {
+    content: '';
+    position: absolute;
+    bottom: -1px;
+    left: 0;
+    width: 100%;
+    height: 3px;
+    background-color: var(--accent-color);
+}
+
+.tab-content {
+    padding: 30px;
+    display: none;
+}
+
+.tab-content.active {
+    display: block;
+}
+
+/* Form Styles */
+.form-group {
+    margin-bottom: 20px;
+}
+
+label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 500;
+    color: var(--primary-color);
+}
+
+input, select, textarea {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 16px;
+    transition: all 0.3s;
+    -webkit-appearance: none;
+}
+
+input:focus, select:focus, textarea:focus {
+    border-color: var(--accent-color);
+    outline: none;
+    box-shadow: 0 0 0 2px rgba(212, 175, 55, 0.2);
+}
+
+/* Groups Styles */
+.groups-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 20px;
+    margin-top: 20px;
+}
+
+.group-card {
+    border: 1px solid #eee;
+    border-radius: 8px;
+    padding: 15px;
+    background: white;
+    transition: all 0.3s;
+    border-top: 3px solid var(--primary-color);
+}
+
+.group-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+    border-top-color: var(--accent-color);
+}
+
+/* Auth Tabs */
+.auth-tabs {
+    display: flex;
+    margin-bottom: 20px;
+}
+
+.auth-tab-btn {
+    padding: 10px 20px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+    color: #777;
+    position: relative;
+    transition: all 0.3s;
+}
+
+.auth-tab-btn:hover {
+    color: var(--primary-color);
+}
+
+.auth-tab-btn.active {
+    color: var(--primary-color);
+    font-weight: 600;
+}
+
+.auth-tab-btn.active::after {
+    content: '';
+    position: absolute;
+    bottom: -1px;
+    left: 0;
+    width: 100%;
+    height: 3px;
+    background-color: var(--accent-color);
+}
+
+.auth-content {
+    display: none;
+}
+
+.auth-content.active {
+    display: block;
+}
+
+/* Mobile Menu */
+.menu-toggle {
+    display: none;
+    cursor: pointer;
+    font-size: 1.5rem;
+    color: white;
+    padding: 10px;
+}
+
+/* Gallery Styles */
+.gallery {
+    padding: 2rem;
+    background: #fdfdfd;
+}
+
+.event-section {
+    margin-bottom: 2rem;
+}
+
+.event-section h3 {
+    font-size: 1.5rem;
+    margin-bottom: 0.5rem;
+}
+
+.image-grid {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.image-grid img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 8px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+}
+
+/* Education Section */
+.education-section {
+    padding: 2rem 0;
+    background-color: #f9f9f9;
+}
+
+.expandable-header {
+    background: none;
+    border: none;
+    font-family: 'Playfair Display', serif;
+    font-size: 2rem;
+    color: var(--primary-color);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.5rem 1rem;
+    margin: 0 auto;
+    position: relative;
+}
+
+.expandable-header i {
+    margin-left: 0.5rem;
+    transition: transform 0.3s ease;
+}
+
+.expandable-header.active i {
+    transform: rotate(180deg);
+}
+
+.education-content {
+    padding: 1rem;
+    animation: fadeIn 0.5s ease-out;
+}
+
+.education-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 1.5rem;
+    margin-top: 1rem;
+}
+
+.edu-card {
+    background-color: white;
+    border-radius: 8px;
+    padding: 1.5rem;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    transition: all 0.3s;
+    border-top: 4px solid var(--primary-color);
+}
+
+.edu-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+    border-top-color: var(--accent-color);
+}
+
+.edu-card h4 {
+    color: var(--primary-color);
+    margin-bottom: 1rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 2px solid var(--accent-color);
+}
+
+.edu-card ul {
+    list-style: none;
+    padding: 0;
+}
+
+.edu-card ul li {
+    margin-bottom: 0.5rem;
+}
+
+.edu-card ul li a {
+    color: var(--dark-color);
+    text-decoration: none;
+    transition: all 0.3s;
+    display: block;
+    padding: 0.5rem;
+    border-radius: 4px;
+}
+
+.edu-card ul li a:hover {
+    color: var(--accent-color);
+    background-color: rgba(42, 88, 133, 0.1);
+    transform: translateX(5px);
+}
+
+.edu-card ul li a i {
+    margin-right: 0.5rem;
+    color: var(--primary-color);
+}
+
+/* Ayah Section */
+.ayah-section {
+    padding: 2rem 0;
+    background-color: #f8f5f0;
+    font-family: 'Poppins', sans-serif;
+}
+
+.ayah-card {
+    background-color: white;
+    padding: 2rem;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    text-align: center;
+    max-width: 600px;
+    margin: 0 auto;
+    border-top: 4px solid var(--primary-color);
+}
+
+.arabic-text {
+    font-size: 2rem;
+    line-height: 1.8;
+    margin-bottom: 1rem;
+    direction: rtl;
+    font-family: 'Amiri Quran', 'Traditional Arabic', serif;
+}
+
+.translation {
+    font-size: 1.1rem;
+    line-height: 1.6;
+    color: #555;
+    margin-bottom: 1rem;
+    font-style: italic;
+}
+
+.reference {
+    color: var(--primary-color);
+    font-weight: 600;
+    margin-bottom: 1.5rem;
+}
+
+#refreshAyah {
+    background-color: var(--primary-color);
+    color: white;
+    border: none;
+    padding: 0.8rem 1.5rem;
+    border-radius: 5px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all 0.3s;
+    margin-top: 1rem;
+}
+
+#refreshAyah:hover {
+    background-color: var(--primary-dark);
+    transform: translateY(-2px);
+}
+
+/* Footer Styles */
+footer {
+    background: linear-gradient(135deg, var(--primary-color), var(--primary-dark));
+    color: white;
+    padding-top: 3rem;
+    padding-bottom: 1.5rem;
+}
+
+.footer-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+    padding: 0 1rem;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.footer-section h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.5rem;
+    margin-bottom: 1.5rem;
+    position: relative;
+    display: inline-block;
+}
+
+.footer-section h3::after {
+    content: '';
+    position: absolute;
+    bottom: -8px;
+    left: 0;
+    width: 50px;
+    height: 3px;
+    background-color: var(--accent-color);
+}
+
+.footer-section ul li {
+    margin-bottom: 0.8rem;
+}
+
+.footer-section ul li a {
+    color: white;
+    transition: all 0.3s;
+}
+
+.footer-section ul li a:hover {
+    color: var(--accent-color);
+    padding-left: 5px;
+}
+
+.footer-contact-item {
+    display: flex;
+    margin-bottom: 1rem;
+    align-items: flex-start;
+}
+
+.footer-contact-icon {
+    color: var(--accent-color);
+    margin-right: 1rem;
+    margin-top: 0.2rem;
+}
+
+.footer-social-links {
+    display: flex;
+    gap: 1rem;
+    margin-top: 1.5rem;
+}
+
+.footer-social-links a {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    background-color: rgba(255,255,255,0.1);
+    color: white;
+    border-radius: 50%;
+    transition: all 0.3s;
+}
+
+.footer-social-links a:hover {
+    background-color: var(--accent-color);
+    color: var(--dark-color);
+    transform: translateY(-3px);
+}
+
+.footer-bottom {
+    text-align: center;
+    margin-top: 3rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid rgba(255,255,255,0.1);
+    font-size: 0.9rem;
+}
+
+/* Gallery Styles */
+.gallery-section {
+    padding: 20px;
+    text-align: center;
+}
+
+.gallery-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 15px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.gallery-item {
+    width: 150px;
+    height: 150px;
+    overflow: hidden;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    transition: transform 0.3s ease;
+}
+
+.gallery-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+}
+
+/* Lightbox Modal */
+.lightbox {
+    display: none;
+    position: fixed;
+    z-index: 9999;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.9);
+    overflow: auto;
+}
+
+.lightbox-content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    width: 100%;
+    position: relative;
+}
+
+.lightbox-img {
+    max-width: 90%;
+    max-height: 90%;
+    object-fit: contain;
+}
+
+.close-lightbox {
+    position: absolute;
+    top: 20px;
+    right: 30px;
+    color: #f1f1f1;
+    font-size: 40px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.close-lightbox:hover {
+    color: var(--accent-color);
+}
+
+.lightbox-nav {
+    position: absolute;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    padding: 0 20px;
+    box-sizing: border-box;
+}
+
+.prev, .next {
+    cursor: pointer;
+    color: white;
+    font-size: 50px;
+    font-weight: bold;
+    transition: 0.3s;
+    user-select: none;
+}
+
+.prev:hover, .next:hover {
+    color: var(--accent-color);
+}
+
+.caption {
+    color: white;
+    text-align: center;
+    padding: 10px 0;
+    position: absolute;
+    bottom: 20px;
+    width: 100%;
+}
+
+/* Read More Button Styles */
+.read-more-btn {
+    background-color: var(--primary-color);
+    color: white;
+    border: none;
+    padding: 0.6rem 1.2rem;
+    border-radius: 4px;
+    margin-top: 1rem;
+    cursor: pointer;
+    transition: all 0.3s;
+    display: inline-flex;
+    align-items: center;
+}
+
+.read-more-btn:hover {
+    background-color: var(--accent-color);
+    color: var(--dark-color);
+    transform: translateY(-2px);
+}
+
+.read-more-btn i {
+    margin-left: 0.5rem;
+    transition: transform 0.3s;
+}
+
+.read-more-btn.active i {
+    transform: rotate(180deg);
+}
+
+.additional-content {
+    padding-top: 1rem;
+    border-top: 1px solid rgba(42, 88, 133, 0.1);
+    margin-top: 1rem;
+    animation: fadeIn 0.5s ease-out;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(-10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+    header {
+        min-height: 60vh;
+        padding: 1.5rem 1rem;
+    }
+    
+    .header-container {
+        padding: 1.5rem;
+    }
+    
+    .header-title {
+        font-size: 2.5rem;
+    }
+    
+    .header-title span {
+        font-size: 1.8rem;
+    }
+    
+    .header-tagline {
+        font-size: 1.2rem;
+    }
+    
+    .logo {
+        height: 100px;
+    }
+    
+    .menu-toggle {
+        display: block;
+    }
+    
+    nav ul {
+        flex-direction: column;
+        display: none;
+        width: 100%;
+    }
+    
+    nav ul.show {
+        display: flex;
+    }
+    
+    nav ul li {
+        margin: 0.3rem 0;
+        width: 100%;
+        text-align: center;
+    }
+    
+    .dropdown-content {
+        position: static;
+        width: 100%;
+        box-shadow: none;
+    }
+    
+    .hero-btns {
+        flex-direction: column;
+    }
+    
+    .btn-outline {
+        margin-left: 0;
+        margin-top: 1rem;
+    }
+    
+    .section {
+        padding: 2rem 0;
+    }
+    
+    .tab-buttons, .auth-tabs {
+        flex-direction: column;
+    }
+    
+    .tab-btn, .auth-tab-btn {
+        width: 100%;
+        text-align: center;
+    }
+    
+    .about-grid, .events-container, .contact-container, .groups-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .sections {
+        flex-direction: column;
+    }
+    
+    .quick-links-section {
+        min-width: 100%;
+    }
+}
+/* ==================== FOOTER STYLES ==================== */
+footer {
+    background: linear-gradient(135deg, var(--primary-color), var(--primary-dark));
+    color: white;
+    padding: 3rem 0 1.5rem;
+    position: relative;
+    overflow: hidden;
+}
+
+footer::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: url('https://example.com/path-to-pattern.png') repeat;
+    opacity: 0.05;
+    pointer-events: none;
+}
+
+.footer-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 1rem;
+    position: relative;
+    z-index: 1;
+}
+
+.footer-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2.5rem;
+    padding: 0 1rem;
+}
+
+.footer-section {
+    margin-bottom: 1.5rem;
+}
+
+.footer-section h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin-bottom: 1.5rem;
+    position: relative;
+    display: inline-block;
+    color: var(--accent-color);
+}
+
+.footer-section h3::after {
+    content: '';
+    position: absolute;
+    bottom: -8px;
+    left: 0;
+    width: 50px;
+    height: 3px;
+    background-color: white;
+}
+
+.footer-section ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.footer-section ul li {
+    margin-bottom: 0.8rem;
+    position: relative;
+    padding-left: 1.2rem;
+}
+
+.footer-section ul li::before {
+    content: '•';
+    position: absolute;
+    left: 0;
+    color: var(--accent-color);
+}
+
+.footer-section ul li a {
+    color: white;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    display: inline-block;
+    padding: 0.2rem 0;
+}
+
+.footer-section ul li a:hover {
+    color: var(--accent-color);
+    transform: translateX(5px);
+}
+
+.footer-contact-item {
+    display: flex;
+    margin-bottom: 1.2rem;
+    align-items: flex-start;
+}
+
+.footer-contact-icon {
+    color: var(--accent-color);
+    margin-right: 1rem;
+    font-size: 1.1rem;
+    margin-top: 0.2rem;
+}
+
+.footer-social-links {
+    display: flex;
+    gap: 1rem;
+    margin-top: 1.5rem;
+}
+
+.footer-social-links a {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    background-color: rgba(255,255,255,0.1);
+    color: white;
+    border-radius: 50%;
+    transition: all 0.3s ease;
+    font-size: 1.1rem;
+}
+
+.footer-social-links a:hover {
+    background-color: var(--accent-color);
+    color: var(--dark-color);
+    transform: translateY(-3px) scale(1.1);
+}
+
+.footer-bottom {
+    text-align: center;
+    margin-top: 3rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid rgba(255,255,255,0.15);
+    font-size: 0.9rem;
+    color: rgba(255,255,255,0.7);
+}
+
+.footer-bottom p {
+    margin: 0;
+}
+
+.back-to-top {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    width: 50px;
+    height: 50px;
+    background-color: var(--accent-color);
+    color: var(--dark-color);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    opacity: 0;
+    visibility: hidden;
+    z-index: 999;
+}
+
+.back-to-top.visible {
+    opacity: 1;
+    visibility: visible;
+}
+
+.back-to-top:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+}
+
+/* Responsive Footer Styles */
+@media (max-width: 768px) {
+    .footer-grid {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+    
+    .footer-section {
+        margin-bottom: 1rem;
+    }
+    
+    .footer-section h3 {
+        font-size: 1.3rem;
+        margin-bottom: 1rem;
+    }
+    
+    .footer-social-links {
+        justify-content: center;
+    }
+    
+    .back-to-top {
+        width: 40px;
+        height: 40px;
+        font-size: 1rem;
+    }
+     
+}
+</style>
     
     <!-- Playfair Display font -->
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="style.css">
 </head>
 <body>
     <!-- ==================== ENHANCED HEADER ==================== -->
@@ -24,7 +1443,7 @@
     </header>
     
     <!-- ==================== REST OF YOUR EXISTING HTML ==================== -->
-   <nav>
+    <nav>
         <div class="container">
             <div class="menu-toggle">
                 <i class="fas fa-bars"></i>
@@ -50,10 +1469,10 @@
     <div class="dropdown-box">
     
  
-                <li><a href="#membership">Membership</a></li>
-                <li><a href="https://quran.com/">Quran</a></li>
+               
                 <li><a href="gallery.html">Gallery</a></li>
                 <li><a href="magazines.html">Magazines</a></li>
+                <li><a href="test.html">Ayah of the Day</a></li>
             </ul>
         </div>
     </nav>
@@ -167,16 +1586,14 @@ leadership development, fostering unity, growth, and lifelong learning.</p>
     </div>
 </section>
 
-   <!-- Events Section -->
-<section class="section" id="events">
-    <div class="container">
-        <div class="section-title">
-            <h2>Events</h2>
-        </div>
-        <!-- Lightbox CSS (include this in your <head> section once) -->
-<link href="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.4/css/lightbox.min.css" rel="stylesheet" />
-
-<div class="events-container">
+    <!-- Events Section -->
+    <section class="section" id="events">
+        <div class="container">
+            <div class="section-title">
+                <h2>Events</h2>
+            </div>
+            
+           <div class="events-container">
     <div class="event-card">
         <div class="event-date">
             Sunday 8th June
@@ -238,8 +1655,8 @@ Eircode: D15 EY81
 
             <!-- Flyer with Lightbox -->
             <div class="event-flyer-container">
-                <a href="DCI 2025 EID UL ADHA GATHERING.jpg" data-lightbox="eid-adha" data-title="Eid al-Adha DCI Gathering - 8 June 2025" class="view-flyer-btn">
-                    <img src="DCI 2025 EID UL ADHA GATHERING.jpg" alt="Flyer thumbnail" style="max-width: 200px; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); margin-top: 10px;" />
+                <a href="images/DCI 2025 EID UL ADHA GATHERING.jpg" data-lightbox="eid-adha" data-title="Eid al-Adha DCI Gathering - 8 June 2025" class="view-flyer-btn">
+                    <img src="images/DCI 2025 EID UL ADHA GATHERING.jpg " alt="Flyer thumbnail" style="max-width: 200px; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); margin-top: 10px;" />
                 </a>
             </div>
 
@@ -248,142 +1665,9 @@ Eircode: D15 EY81
     </div>
 </div>
 
-<!-- Lightbox JS (include before </body> tag) -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.4/js/lightbox.min.js"></script>
-
-        
-
-            <div class="event-card">
-                <div class="event-date">
                    
-                </div>
-                <div class="event-content">
-                    <div class="event-meta">
-                        <span>
-                        <span>
-                    </div>
-                    <h2>
-                    </h2>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-                
-                <div class="event-card">
-                    <div class="event-date">
-                       
-                    </div>
-                    <div class="event-content">
-                        <h3></h3>
-                     
-                            <span>
-                            <span>
-                        </div>
-                        <h2>
-                        </h2>
-                        
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
 
-    <!-- Prayer Timetable Section -->
-   
-  <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dublin Prayer Timetable - June 2025</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            line-height: 1.6;
-            color: #333;
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 20px;
-        }
-        .section {
-            padding: 40px 0;
-        }
-        .container {
-            width: 100%;
-            padding-right: 15px;
-            padding-left: 15px;
-            margin-right: auto;
-            margin-left: auto;
-        }
-        .section-title {
-            text-align: center;
-            margin-bottom: 30px;
-        }
-        .section-title h2 {
-            font-size: 32px;
-            font-weight: 700;
-            color: #2a4365;
-        }
-        .prayer-container {
-            background-color: #f8f9fa;
-            border-radius: 8px;
-            padding: 30px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-        }
-        .location {
-            font-size: 18px;
-            font-weight: bold;
-            margin-bottom: 10px;
-            color: #2a4365;
-        }
-        .date {
-            font-size: 16px;
-            margin-bottom: 20px;
-            color: #4a5568;
-        }
-        .prayer-table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-bottom: 25px;
-        }
-        .prayer-table th, .prayer-table td {
-            padding: 12px 15px;
-            text-align: left;
-            border-bottom: 1px solid #ddd;
-        }
-        .prayer-table th {
-            background-color: #2a4365;
-            color: white;
-            font-weight: 600;
-        }
-        .prayer-table tr:nth-child(even) {
-            background-color: #f2f2f2;
-        }
-        .prayer-table tr:hover {
-            background-color: #e2e8f0;
-        }
-        .next-prayer {
-            font-size: 18px;
-            font-weight: bold;
-            padding: 15px;
-            background-color: #2a4365;
-            color: white;
-            border-radius: 5px;
-            text-align: center;
-        }
-        @media (max-width: 768px) {
-            .prayer-table {
-                font-size: 14px;
-            }
-            .prayer-table th, .prayer-table td {
-                padding: 8px 10px;
-            }
-        }
-    </style>
-</head>
-<body>
-    <section class="section" id="prayer-timetable">
+  <section class="section" id="prayer-timetable">
         <div class="container">
             <div class="section-title">
                 <h2>Prayer Timetable</h2>
@@ -543,7 +1827,15 @@ Eircode: D15 EY81
     </script>
 </body>
 </html>
-               <script src="script.js"></script>
+
+            </script>
+        </div>
+    </div>
+</section>
+
+            
+            
+                </script>
             </div>
         </div>
     </section>
@@ -561,7 +1853,72 @@ Eircode: D15 EY81
         </div>
     </div>
 </section>
+<script>
+// Ayah of the Day Functionality
+document.addEventListener('DOMContentLoaded', function() {
+    // Load Arabic font
+    const fontLink = document.createElement('link');
+    fontLink.href = 'https://fonts.googleapis.com/css2?family=Amiri+Quran&display=swap';
+    fontLink.rel = 'stylesheet';
+    document.head.appendChild(fontLink);
 
+    const ayahs = [
+        {
+            arabic: "وَإِن تَصْبِرُوا۟ وَتَتَّقُوا۟ فَإِنَّ ذَٰلِكَ مِنْ عَزْمِ ٱلْأُمُورِ",
+            translation: "And if you are patient and fear Allah, indeed, that is of the matters requiring resolve.",
+            reference: "Surah Al-Imran (3:186)"
+        },
+        {
+            arabic: "إِنَّ مَعَ ٱلْعُسْرِ يُسْرًا",
+            translation: "Indeed, with hardship comes ease.",
+            reference: "Surah Ash-Sharh (94:6)"
+        },
+        {
+            arabic: "وَٱذْكُرُوا۟ نِعْمَةَ ٱللَّهِ عَلَيْكُمْ",
+            translation: "And remember the favor of Allah upon you.",
+            reference: "Surah Al-Baqarah (2:231)"
+        },
+        {
+            arabic: "وَتَعَاوَنُوا۟ عَلَى ٱلْبِرِّ وَٱلتَّقْوَىٰ",
+            translation: "And cooperate in righteousness and piety.",
+            reference: "Surah Al-Ma'idah (5:2)"
+        },
+        {
+            arabic: "يَٰٓأَيُّهَا ٱلَّذِينَ ءَامَنُوا۟ ٱصْبِرُوا۟ وَصَابِرُوا۟",
+            translation: "O you who have believed, persevere and endure.",
+            reference: "Surah Al-Imran (3:200)"
+        },
+        {
+            arabic: "وَٱلَّذِينَ جَٰهَدُوا۟ فِينَا لَنَهْدِيَنَّهُمْ سُبُلَنَا",
+            translation: "And those who strive for Us - We will surely guide them to Our ways.",
+            reference: "Surah Al-Ankabut (29:69)"
+        }
+    ];
+
+    // Get today's ayah based on date (consistent daily)
+    function getDailyAyah() {
+        const today = new Date();
+        const dayOfYear = Math.floor((today - new Date(today.getFullYear(), 0, 0)) / (1000 * 60 * 60 * 24));
+        return ayahs[dayOfYear % ayahs.length];
+    }
+
+    // Display ayah
+    function displayAyah(ayah) {
+        document.getElementById('ayahArabic').textContent = ayah.arabic;
+        document.getElementById('ayahTranslation').textContent = `"${ayah.translation}"`;
+        document.getElementById('ayahReference').textContent = ayah.reference;
+    }
+
+    // Initial display
+    displayAyah(getDailyAyah());
+
+    // Refresh button - shows random ayah
+    document.getElementById('refreshAyah').addEventListener('click', function() {
+        const randomAyah = ayahs[Math.floor(Math.random() * ayahs.length)];
+        displayAyah(randomAyah);
+    });
+});
+</script>
 
     <!-- Quick Links Sections -->
     <div class="container">
@@ -571,8 +1928,8 @@ Eircode: D15 EY81
                 <ul>
                     <li><a href="#mission"><i class="fas fa-bullseye"></i> Mission</a></li>
                     <li><a href="#events"><i class="fas fa-calendar-alt"></i> Events</a></li>
-                    <li><a href="gallery.html"><i class="fas fa-images"></i> Gallery</a></li>
-                    <li><a href="mailto:deccanclubofireland@gmail.com"><i class="fas fa-envelope"></i> Contact</a></li>
+                    <li><a href="#gallery"><i class="fas fa-images"></i> Gallery</a></li>
+                    <li><a href="#contact"><i class="fas fa-envelope"></i> Contact</a></li>
                     <li><a href="https://www.rte.ie/" target="_blank"><i class="fas fa-newspaper"></i> RTE News (Ireland)</a></li>
                     <li><a href="https://www.espncricinfo.com/" target="_blank"><i class="fas fa-cricket"></i> Cricket News (ESPN)</a></li>
                 </ul>
@@ -600,26 +1957,12 @@ Eircode: D15 EY81
                 </ul>
             </section>
         </div>
-         
-        <div class="container">
-            <section class="quick-links-section">
-                <h2>Deccan Landmarks</h2>
-                <ul>
-                    <li><a href="https://www.chowmahalla.in/"><i class=""></i>Chowmallah Palace</a></li>
-                    <li><a href="https://www.incredibleindia.gov.in/en/telangana/hyderabad/charminar"><i class=""></i>Charminar</a></li>
-                    <li><a href="https://hyderabad.telangana.gov.in/tourist-place/golconda-fort/"><i class=""></i>Golconda Fort</a></li>
-                    <li><a href="https://salarjungmuseum.in/"><i class=""></i>Salar Jung Museum</a></li>
-                    <li><a href="https://www.osmania.ac.in/" target="_blank"><i class=""></i>Osmainia University</a></li>
-                    <li><a href="https://www.thenizamsmuseum.com/" target="_blank"><i class="fas fa-cricket"></i>Nizams Museum</a></li>
-                </ul>
-            </section>
     </div>
 
    
                 
 <
     </script>
-<script src="script.js"></script>
 </body>
 </html>
 
@@ -628,9 +1971,7 @@ Eircode: D15 EY81
         <div class="tab-buttons">
             <button class="tab-btn active" data-tab="privacy">Privacy Policy</button>
             <button class="tab-btn" data-tab="terms">Terms & Conditions</button>
-      
            
-         
         </div>
         
         <div class="tab-content active" id="privacy">
@@ -663,39 +2004,72 @@ External links may appear on our site. DCI is not responsible for the privacy pr
             </ul>
         </div>
         
-       
 
+    <script>
+        // Tab functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            // Main tabs
+            const tabButtons = document.querySelectorAll('.tab-btn');
+            const tabContents = document.querySelectorAll('.tab-content');
+            
+            tabButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    // Remove active class from all buttons and contents
+                    tabButtons.forEach(btn => btn.classList.remove('active'));
+                    tabContents.forEach(content => content.classList.remove('active'));
+                    
+                    // Add active class to clicked button and corresponding content
+                    button.classList.add('active');
+                    const tabId = button.getAttribute('data-tab');
+                    document.getElementById(tabId).classList.add('active');
+                });
+            });
+            
+            // Nested auth tabs
+            const authTabButtons = document.querySelectorAll('.auth-tab-btn');
+            const authContents = document.querySelectorAll('.auth-content');
 
-            </ul>
-        </div>
-        
-    
-        
-        <div class="tab-content" id="groups">
-            <h3>Join Our Interest Groups</h3>
-            <div class="groups-grid">
-                <div class="group-card">
-                    <h4>Cultural Events</h4>
-                    <p>Organize and participate in cultural festivals</p>
-                    <button class="btn" style="margin-top: 10px;">Join Group</button>
-                </div>
-                
-                <div class="group-card">
-                    <h4>Professional Network</h4>
-                    <p>Connect with Indian professionals in Ireland</p>
-                    <button class="btn" style="margin-top: 10px;">Join Group</button>
-                </div>
-                
-                <div class="group-card">
-                    <h4>Sports Club</h4>
-                    <p>Cricket, badminton and other sports activities</p>
-                    <button class="btn" style="margin-top: 10px;">Join Group</button>
-                </div>
-            </div>
-        </div>
-    </div>
+            
+            authTabButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    // Remove active class from all buttons and contents
+                    authTabButtons.forEach(btn => btn.classList.remove('active'));
+                    authContents.forEach(content => content.classList.remove('active'));
+                    
+                    // Add active class to clicked button and corresponding content
+                    button.classList.add('active');
+                    const authTabId = button.getAttribute('data-auth-tab') + 'Tab';
+                    document.getElementById(authTabId).classList.add('active');
+                });
+            });
 
-    
+            // Mobile menu toggle
+            document.querySelector('.menu-toggle').addEventListener('click', function() {
+                document.getElementById('main-nav').classList.toggle('show');
+            });
+
+            // Read More Button Functionality
+            const readMoreBtns = document.querySelectorAll('.read-more-btn');
+            
+            readMoreBtns.forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const additionalContent = this.nextElementSibling;
+                    const isExpanded = additionalContent.style.display === 'block';
+                    
+                    // Toggle content visibility
+                    additionalContent.style.display = isExpanded ? 'none' : 'block';
+                    
+                    // Update button text and icon
+                    this.innerHTML = isExpanded ? 
+                        'Read More <i class="fas fa-chevron-down"></i>' : 
+                        'Read Less <i class="fas fa-chevron-up"></i>';
+                    
+                    // Toggle active class
+                    this.classList.toggle('active');
+                });
+            });
+        });
+    </script>
 
     <!-- ==================== FOOTER ==================== -->
 <!-- ==================== FOOTER ==================== -->
@@ -704,7 +2078,7 @@ External links may appear on our site. DCI is not responsible for the privacy pr
         <div class="footer-grid">
             <div class="footer-section">
                 <h3>About DCI</h3>
-                <p>The Deccan Club of Ireland bridges cultures between the Deccan region of India and Ireland </p>
+                <p>The Deccan Club of Ireland bridges cultures between the Deccan region of India and Ireland through cultural exchange, business collaboration, and community development.</p>
                 <div class="footer-social-links">
                     <a href="https://www.facebook.com/HyderabadisInIreland/" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
                     <a href="https://x.com/DeccanClub2005" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
@@ -751,24 +2125,29 @@ External links may appear on our site. DCI is not responsible for the privacy pr
                 <div class="footer-contact-item">
                     <div class="footer-contact-icon"><i class="fas fa-envelope"></i></div>
                     <div>deccanclubofireland@gmail.com</div>
+                    <form action="https://formsubmit.co/el/papagi" method="POST">
+                    <input type="text" name="name" placeholder="Name" required>
+                    <input type="email" name="email" placeholder="Email" required>
+                    <textarea name="message" placeholder="Message"></textarea>
+                    <button type="submit">Send</button>
+</form>
                 </div>
             </div>
         </div>
         
         <div class="footer-bottom">
-            <p>&copy;  Deccan Club of Ireland. All rights reserved.</p>
+            <p>&copy; <script>document.write(new Date().getFullYear())</script> Deccan Club of Ireland. All rights reserved.</p>
         </div>
     </div>
     
-    <div class="back-to-top" id="backToTop">
+    <div class="back-to-top" id="backToTop">`
         <i class="fas fa-arrow-up"></i>
     </div>
 </footer>
             <div class="border-t border-white/10 mt-8 pt-6 text-center text-sm">
-                <p>&copy;  Deccan Club of Ireland. All rights reserved.</p>
+                <p>&copy; <script>document.write(new Date().getFullYear())</script> Deccan Club of Ireland. All rights reserved.</p>
             </div>
         </div>
     </footer>
-<script src="script.js"></script>
 </body>
 </html>
