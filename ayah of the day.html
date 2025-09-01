@@ -1,0 +1,541 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ayah of the Day</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #2E7D32;
+            --secondary-color: #4CAF50;
+            --text-color: #333;
+            --light-gray: #f5f5f5;
+            --medium-gray: #e0e0e0;
+            --dark-gray: #757575;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--text-color);
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .ayah-container {
+            padding: 25px;
+            border-radius: 8px;
+            background-color: var(--light-gray);
+            margin: 20px 0;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+        }
+
+        .section-title {
+            color: var(--primary-color);
+            border-bottom: 2px solid var(--medium-gray);
+            padding-bottom: 8px;
+            margin-top: 30px;
+        }
+
+        .ayah-text {
+            font-family: 'Traditional Arabic', 'Amiri Quran', serif;
+            line-height: 2;
+            font-size: 28px;
+            text-align: right;
+            direction: rtl;
+            margin: 20px 0;
+            padding: 15px;
+            background-color: white;
+            border-radius: 5px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+
+        .translation-container {
+            margin: 20px 0;
+        }
+
+        .translation-selector {
+            margin-bottom: 15px;
+        }
+
+        select {
+            padding: 8px 12px;
+            border-radius: 4px;
+            border: 1px solid var(--medium-gray);
+            font-size: 16px;
+        }
+
+        .ayah-translation {
+            padding: 15px;
+            background-color: white;
+            border-radius: 5px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+
+        .ayah-reference {
+            color: var(--dark-gray);
+            text-align: right;
+            font-style: italic;
+            margin: 10px 0;
+        }
+
+        .audio-player {
+            width: 100%;
+            margin: 20px 0;
+            background-color: white;
+            border-radius: 5px;
+            padding: 10px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+
+        .tafsir-container {
+            margin: 20px 0;
+            padding: 15px;
+            background-color: white;
+            border-radius: 5px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+
+        .social-share {
+            display: flex;
+            gap: 10px;
+            margin: 20px 0;
+        }
+
+        .social-btn {
+            padding: 8px 15px;
+            border-radius: 4px;
+            color: white;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            font-size: 14px;
+        }
+
+        .facebook { background-color: #3b5998; }
+        .twitter { background-color: #1da1f2; }
+        .whatsapp { background-color: #25d366; }
+
+        .archive-container {
+            margin: 30px 0;
+        }
+
+        .archive-list {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        .archive-item {
+            padding: 12px 15px;
+            margin: 8px 0;
+            background-color: white;
+            border-radius: 5px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .archive-item:hover {
+            background-color: var(--light-gray);
+        }
+
+        .controls {
+            display: flex;
+            justify-content: space-between;
+            margin: 20px 0;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .btn {
+            background-color: var(--secondary-color);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            cursor: pointer;
+            border-radius: 4px;
+            transition: background-color 0.3s;
+        }
+
+        .btn:hover {
+            background-color: var(--primary-color);
+        }
+
+        .loading {
+            text-align: center;
+            font-style: italic;
+            color: var(--dark-gray);
+            padding: 20px;
+        }
+
+        @media (max-width: 600px) {
+            .ayah-text {
+                font-size: 22px;
+            }
+            
+            .controls {
+                flex-direction: column;
+            }
+            
+            .btn {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="ayah-container">
+        <h1 style="text-align: center; color: var(--primary-color);">Ayah of the Day</h1>
+        
+        <div id="ayah-content">
+            <p class="loading">Loading ayah...</p>
+        </div>
+        
+        <div class="controls">
+            <button class="btn" onclick="fetchAyahOfTheDay()">
+                <i class="fas fa-sync-alt"></i> New Ayah
+            </button>
+            <button class="btn" onclick="saveToArchive()">
+                <i class="fas fa-bookmark"></i> Save to Archive
+            </button>
+        </div>
+    </div>
+
+    <h2 class="section-title">Audio Recitation</h2>
+    <div class="audio-player">
+        <audio id="ayah-audio" controls style="width: 100%">
+            Your browser does not support the audio element.
+        </audio>
+    </div>
+
+    <h2 class="section-title">Translations</h2>
+    <div class="translation-container">
+        <div class="translation-selector">
+            <select id="translation-select" onchange="loadTranslation()">
+                <option value="131">Saheeh International (English)</option>
+                <option value="149">Mohsin Khan (English)</option>
+                <option value="19">Yusuf Ali (English)</option>
+                <option value="33">French</option>
+                <option value="31">Spanish</option>
+                <option value="101">Indonesian</option>
+            </select>
+        </div>
+        <div class="ayah-translation" id="ayah-translation">
+            <!-- Translation will be loaded here -->
+        </div>
+    </div>
+
+    <h2 class="section-title">Tafsir (Explanation)</h2>
+    <div class="tafsir-container" id="tafsir-content">
+        <p>Select an ayah to view its tafsir (explanation).</p>
+    </div>
+
+    <h2 class="section-title">Share This Ayah</h2>
+    <div class="social-share">
+        <a href="#" class="social-btn facebook" id="facebook-share">
+            <i class="fab fa-facebook-f"></i> Facebook
+        </a>
+        <a href="#" class="social-btn twitter" id="twitter-share">
+            <i class="fab fa-twitter"></i> Twitter
+        </a>
+        <a href="#" class="social-btn whatsapp" id="whatsapp-share">
+            <i class="fab fa-whatsapp"></i> WhatsApp
+        </a>
+    </div>
+
+    <h2 class="section-title">Previous Ayahs</h2>
+    <div class="archive-container">
+        <ul class="archive-list" id="ayah-archive">
+            <!-- Archive items will be loaded here -->
+        </ul>
+    </div>
+
+    <script>
+        // Current ayah data
+        let currentAyah = null;
+        const translations = {
+            131: "Saheeh International",
+            149: "Mohsin Khan",
+            19: "Yusuf Ali",
+            33: "French",
+            31: "Spanish",
+            101: "Indonesian"
+        };
+
+        // DOM elements
+        const ayahContentEl = document.getElementById('ayah-content');
+        const translationEl = document.getElementById('ayah-translation');
+        const tafsirEl = document.getElementById('tafsir-content');
+        const audioEl = document.getElementById('ayah-audio');
+        const archiveEl = document.getElementById('ayah-archive');
+        const translationSelectEl = document.getElementById('translation-select');
+
+        // Function to fetch a random ayah
+        async function fetchAyahOfTheDay() {
+            try {
+                ayahContentEl.innerHTML = '<p class="loading">Loading ayah...</p>';
+                translationEl.innerHTML = '<p class="loading">Loading translation...</p>';
+                tafsirEl.innerHTML = '<p class="loading">Loading tafsir...</p>';
+                
+                // Get a random surah (1-114)
+                const randomSurah = Math.floor(Math.random() * 114) + 1;
+                
+                // First get surah info to know how many ayahs it contains
+                const surahInfo = await fetch(`https://api.quran.com/api/v4/chapters/${randomSurah}`)
+                    .then(response => response.json());
+                
+                const ayahCount = surahInfo.chapter.verses_count;
+                const randomAyah = Math.floor(Math.random() * ayahCount) + 1;
+                
+                // Now fetch the specific ayah with multiple translations
+                const verseResponse = await fetch(
+                    `https://api.quran.com/api/v4/verses/by_key/${randomSurah}:${randomAyah}?translations=131,149,19&fields=text_uthmani`
+                );
+                
+                const verseData = await verseResponse.json();
+                const ayah = verseData.verse.text_uthmani;
+                const translations = verseData.verse.translations;
+                
+                // Get audio
+                const audioResponse = await fetch(
+                    `https://api.quran.com/api/v4/chapter_recitations/7/${randomSurah}`
+                );
+                const audioData = await audioResponse.json();
+                const audioUrl = audioData.audio_file.audio_url;
+                
+                // Get tafsir (simplified example - in a real app you'd need a tafsir API)
+                const tafsirText = await getTafsir(randomSurah, randomAyah);
+                
+                // Store current ayah data
+                currentAyah = {
+                    surahNumber: randomSurah,
+                    ayahNumber: randomAyah,
+                    surahName: surahInfo.chapter.name_simple,
+                    arabicText: ayah,
+                    translations: translations,
+                    audioUrl: audioUrl,
+                    tafsir: tafsirText,
+                    date: new Date().toISOString().split('T')[0]
+                };
+                
+                // Display the ayah
+                displayAyah(currentAyah);
+                
+                // Store today's ayah in localStorage
+                localStorage.setItem('lastAyahDate', currentAyah.date);
+                localStorage.setItem('lastAyah', JSON.stringify(currentAyah));
+                
+            } catch (error) {
+                console.error("Error fetching ayah:", error);
+                ayahContentEl.innerHTML = '<p>Could not load ayah at this time. Please try again later.</p>';
+            }
+        }
+
+        // Display the ayah with all its data
+        function displayAyah(ayahData) {
+            // Display Arabic text
+            ayahContentEl.innerHTML = `
+                <div class="ayah-text">${ayahData.arabicText}</div>
+                <div class="ayah-reference">Surah ${ayahData.surahName} (${ayahData.surahNumber}:${ayahData.ayahNumber})</div>
+            `;
+            
+            // Display default translation
+            loadTranslation();
+            
+            // Set up audio player
+            audioEl.src = ayahData.audioUrl;
+            audioEl.load();
+            
+            // Display tafsir
+            tafsirEl.innerHTML = `
+                <h3>Tafsir Ibn Kathir (Simplified)</h3>
+                <p>${ayahData.tafsir}</p>
+            `;
+            
+            // Set up social sharing
+            setupSocialSharing(ayahData);
+        }
+
+        // Load selected translation
+        function loadTranslation() {
+            if (!currentAyah) return;
+            
+            const translationId = translationSelectEl.value;
+            const translation = currentAyah.translations.find(t => t.id == translationId);
+            
+            if (translation) {
+                translationEl.innerHTML = `
+                    <p><strong>${translations[translationId]}:</strong></p>
+                    <p>${translation.text}</p>
+                `;
+            } else {
+                translationEl.innerHTML = '<p>Translation not available for this selection.</p>';
+            }
+        }
+
+        // Simplified tafsir function (in a real app, you'd use a tafsir API)
+        async function getTafsir(surahNumber, ayahNumber) {
+            // This is a placeholder - in reality you'd need a tafsir API or database
+            const tafsirs = [
+                "This ayah reminds us of Allah's mercy and guidance for those who believe and do righteous deeds.",
+                "Allah emphasizes the importance of patience and prayer in this verse, as they are means of divine assistance.",
+                "The verse highlights the transient nature of worldly life compared to the eternal life of the Hereafter.",
+                "Here Allah commands justice, kindness, and giving to relatives while forbidding immorality and oppression.",
+                "This ayah serves as a reminder that Allah is with those who are patient and steadfast in adversity.",
+                "The verse illustrates the signs of Allah in creation, inviting people to reflect on His power and wisdom."
+            ];
+            
+            // Return a random tafsir for demonstration
+            return tafsirs[Math.floor(Math.random() * tafsirs.length)];
+        }
+
+        // Set up social sharing buttons
+        function setupSocialSharing(ayahData) {
+            const shareText = `Ayah of the Day: ${ayahData.arabicText} - Surah ${ayahData.surahName} ${ayahData.surahNumber}:${ayahData.ayahNumber}`;
+            const shareUrl = window.location.href.split('?')[0];
+            
+            document.getElementById('facebook-share').href = 
+                `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(shareUrl)}&quote=${encodeURIComponent(shareText)}`;
+                
+            document.getElementById('twitter-share').href = 
+                `https://twitter.com/intent/tweet?text=${encodeURIComponent(shareText)}&url=${encodeURIComponent(shareUrl)}`;
+                
+            document.getElementById('whatsapp-share').href = 
+                `https://wa.me/?text=${encodeURIComponent(shareText + ' ' + shareUrl)}`;
+        }
+
+        // Save current ayah to archive
+        function saveToArchive() {
+            if (!currentAyah) return;
+            
+            let archive = JSON.parse(localStorage.getItem('ayahArchive') || '[]');
+            
+            // Check if this ayah is already in archive
+            const exists = archive.some(item => 
+                item.surahNumber === currentAyah.surahNumber && 
+                item.ayahNumber === currentAyah.ayahNumber
+            );
+            
+            if (!exists) {
+                archive.unshift(currentAyah);
+                localStorage.setItem('ayahArchive', JSON.stringify(archive));
+                loadArchive();
+                alert('Ayah saved to archive!');
+            } else {
+                alert('This ayah is already in your archive.');
+            }
+        }
+
+        // Load saved ayahs from archive
+        function loadArchive() {
+            const archive = JSON.parse(localStorage.getItem('ayahArchive') || '[]');
+            
+            if (archive.length === 0) {
+                archiveEl.innerHTML = '<li class="archive-item">No ayahs saved yet</li>';
+                return;
+            }
+            
+            archiveEl.innerHTML = archive.map(ayah => `
+                <li class="archive-item">
+                    <span>Surah ${ayah.surahName} ${ayah.surahNumber}:${ayah.ayahNumber} - ${ayah.date}</span>
+                    <button onclick="loadAyahFromArchive(${ayah.surahNumber}, ${ayah.ayahNumber})" 
+                            style="background: none; border: none; color: var(--secondary-color); cursor: pointer;">
+                        <i class="fas fa-eye"></i> View
+                    </button>
+                </li>
+            `).join('');
+        }
+
+        // Load ayah from archive
+        async function loadAyahFromArchive(surahNumber, ayahNumber) {
+            // Fetch the ayah details again
+            const surahInfo = await fetch(`https://api.quran.com/api/v4/chapters/${surahNumber}`)
+                .then(response => response.json());
+            
+            const verseResponse = await fetch(
+                `https://api.quran.com/api/v4/verses/by_key/${surahNumber}:${ayahNumber}?translations=131,149,19&fields=text_uthmani`
+            );
+            const verseData = await verseResponse.json();
+            const ayah = verseData.verse.text_uthmani;
+            const translations = verseData.verse.translations;
+            
+            // Get audio
+            const audioResponse = await fetch(
+                `https://api.quran.com/api/v4/chapter_recitations/7/${surahNumber}`
+            );
+            const audioData = await audioResponse.json();
+            const audioUrl = audioData.audio_file.audio_url;
+            
+            // Get tafsir
+            const tafsirText = await getTafsir(surahNumber, ayahNumber);
+            
+            // Set as current ayah
+            currentAyah = {
+                surahNumber: surahNumber,
+                ayahNumber: ayahNumber,
+                surahName: surahInfo.chapter.name_simple,
+                arabicText: ayah,
+                translations: translations,
+                audioUrl: audioUrl,
+                tafsir: tafsirText,
+                date: new Date().toISOString().split('T')[0]
+            };
+            
+            displayAyah(currentAyah);
+            
+            // Scroll to top
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // Check if we have a stored ayah from today
+        function loadAyah() {
+            const today = new Date().toISOString().split('T')[0];
+            const lastAyahDate = localStorage.getItem('lastAyahDate');
+            
+            if (lastAyahDate === today) {
+                // Load the stored ayah
+                const lastAyah = JSON.parse(localStorage.getItem('lastAyah'));
+                currentAyah = lastAyah;
+                displayAyah(lastAyah);
+            } else {
+                // Fetch a new ayah
+                fetchAyahOfTheDay();
+            }
+            
+            // Load archive
+            loadArchive();
+        }
+
+        // Initialize on page load
+        window.onload = loadAyah;
+
+        // Automatically refresh at midnight
+        function setMidnightRefresh() {
+            const now = new Date();
+            const midnight = new Date(
+                now.getFullYear(),
+                now.getMonth(),
+                now.getDate() + 1, // Next day
+                0, 0, 0 // Midnight
+            );
+            const timeUntilMidnight = midnight - now;
+            
+            setTimeout(() => {
+                fetchAyahOfTheDay();
+                setMidnightRefresh(); // Set again for next day
+            }, timeUntilMidnight);
+        }
+
+        // Start the midnight refresh cycle
+        setMidnightRefresh();
+    </script>
+</body>
+</html>
